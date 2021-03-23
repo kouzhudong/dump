@@ -1,0 +1,165 @@
+只给dump不给分析，自己和别人都不好意思，所以这里给个头。
+
+0: kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+SYSTEM_SERVICE_EXCEPTION (3b)
+An exception happened while executing a system service routine.
+Arguments:
+Arg1: 00000000c0000005, Exception code that caused the bugcheck
+Arg2: fffff8037660af6f, Address of the instruction which caused the bugcheck
+Arg3: ffff998163b167e0, Address of the context record for the exception that caused the bugcheck
+Arg4: 0000000000000000, zero.
+
+Debugging Details:
+------------------
+
+
+KEY_VALUES_STRING: 1
+
+    Key  : Analysis.CPU.Sec
+    Value: 1
+
+    Key  : Analysis.DebugAnalysisProvider.CPP
+    Value: Create: 8007007e on CORREY
+
+    Key  : Analysis.DebugData
+    Value: CreateObject
+
+    Key  : Analysis.DebugModel
+    Value: CreateObject
+
+    Key  : Analysis.Elapsed.Sec
+    Value: 1
+
+    Key  : Analysis.Memory.CommitPeak.Mb
+    Value: 156
+
+    Key  : Analysis.System
+    Value: CreateObject
+
+
+TAG_NOT_DEFINED_202b:  *** Unknown TAG in analysis list 202b
+
+
+BUGCHECK_CODE:  3b
+
+BUGCHECK_P1: c0000005
+
+BUGCHECK_P2: fffff8037660af6f
+
+BUGCHECK_P3: ffff998163b167e0
+
+BUGCHECK_P4: 0
+
+CONTEXT:  ffff998163b167e0 -- (.cxr 0xffff998163b167e0)
+rax=ffff9b05fd53bef8 rbx=ffff9b05f2f46bb0 rcx=0000000000000000
+rdx=ffff9b05fd53bde0 rsi=0000000000000000 rdi=ffff9b05fd53bde0
+rip=fffff8037660af6f rsp=ffff998163b171e0 rbp=0000000000000000
+ r8=ffff9b05fd53bde0  r9=ffff9b05e9f02bb0 r10=fffff8037660af50
+r11=0000000000000000 r12=0000000000000000 r13=0000000000000000
+r14=0000000000000000 r15=ffff9b05e9f02bb0
+iopl=0         nv up ei ng nz na pe nc
+cs=0010  ss=0018  ds=002b  es=002b  fs=0053  gs=002b             efl=00050282
+condrv!CdpDispatchCleanup+0x1f:
+fffff803`7660af6f 488b01          mov     rax,qword ptr [rcx] ds:002b:00000000`00000000=????????????????
+Resetting default scope
+
+BLACKBOXBSD: 1 (!blackboxbsd)
+
+
+BLACKBOXNTFS: 1 (!blackboxntfs)
+
+
+BLACKBOXPNP: 1 (!blackboxpnp)
+
+
+BLACKBOXWINLOGON: 1
+
+PROCESS_NAME:  msedge.exe
+
+STACK_TEXT:  
+ffff9981`63b171e0 fffff803`5da52f55 : ffff9b05`fd53bde0 fffff803`5da5346d 00000000`00000000 00000000`00000000 : condrv!CdpDispatchCleanup+0x1f
+ffff9981`63b17210 fffff803`5ddfd96a : 00000000`00000000 ffff9b05`f2f46bb0 00000000`00000000 00000000`00040000 : nt!IofCallDriver+0x55
+ffff9981`63b17250 fffff803`5ddff875 : ffff9b05`f2f46bb0 00000000`00000000 00000000`e9f02b45 ffff9b05`e9f02bb0 : nt!IopCloseFile+0x17a
+ffff9981`63b172e0 fffff803`5de2751e : ffff9b05`e9f02bb0 00000000`00000000 ffff9b06`00af2620 ffff9b06`00af2601 : nt!IopParseDevice+0x1dc5
+ffff9981`63b17450 fffff803`5ddeb19a : ffff9b06`00af2600 ffff9981`63b176b8 00000000`00000040 ffff9b05`db0dcc40 : nt!ObpLookupObjectName+0x3fe
+ffff9981`63b17620 fffff803`5de6da0e : 0000007f`00000000 0000006e`1b3ff0e0 00000000`00000000 0000006e`1b3ff0b0 : nt!ObOpenObjectByNameEx+0x1fa
+ffff9981`63b17750 fffff803`5dc071b5 : ffff9b06`02b9a080 ffff9b05`f52c7160 ffff9b06`02b9a080 000001c1`31e0daa0 : nt!NtQueryFullAttributesFile+0x1ce
+ffff9981`63b17a00 00007ff8`f6e6e864 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x25
+0000006e`1b3ff058 00000000`00000000 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ff8`f6e6e864
+
+
+SYMBOL_NAME:  condrv!CdpDispatchCleanup+1f
+
+MODULE_NAME: condrv
+
+IMAGE_NAME:  condrv.sys
+
+STACK_COMMAND:  .cxr 0xffff998163b167e0 ; kb
+
+BUCKET_ID_FUNC_OFFSET:  1f
+
+FAILURE_BUCKET_ID:  0x3B_c0000005_condrv!CdpDispatchCleanup
+
+OS_VERSION:  10.0.19041.1
+
+BUILDLAB_STR:  vb_release
+
+OSPLATFORM_TYPE:  x64
+
+OSNAME:  Windows 10
+
+FAILURE_ID_HASH:  {4713cd15-5baf-96a2-7e8b-3fec2da6a08d}
+
+Followup:     MachineOwner
+---------
+
+0: kd> .cxr 0xffff998163b167e0
+rax=ffff9b05fd53bef8 rbx=ffff9b05f2f46bb0 rcx=0000000000000000
+rdx=ffff9b05fd53bde0 rsi=0000000000000000 rdi=ffff9b05fd53bde0
+rip=fffff8037660af6f rsp=ffff998163b171e0 rbp=0000000000000000
+ r8=ffff9b05fd53bde0  r9=ffff9b05e9f02bb0 r10=fffff8037660af50
+r11=0000000000000000 r12=0000000000000000 r13=0000000000000000
+r14=0000000000000000 r15=ffff9b05e9f02bb0
+iopl=0         nv up ei ng nz na pe nc
+cs=0010  ss=0018  ds=002b  es=002b  fs=0053  gs=002b             efl=00050282
+condrv!CdpDispatchCleanup+0x1f:
+fffff803`7660af6f 488b01          mov     rax,qword ptr [rcx] ds:002b:00000000`00000000=????????????????
+0: kd> lmvm condrv
+Browse full module list
+start             end                 module name
+fffff803`76600000 fffff803`76613000   condrv     (pdb symbols)          c:\symbols\condrv.pdb\44FFBB62194A3947FDECE54E233F93551\condrv.pdb
+    Loaded symbol image file: condrv.sys
+    Image path: \SystemRoot\System32\drivers\condrv.sys
+    Image name: condrv.sys
+    Browse all global symbols  functions  data
+    Image was built with /Brepro flag.
+    Timestamp:        B47B2254 (This is a reproducible build file hash, not a timestamp)
+    CheckSum:         0001B87D
+    ImageSize:        00013000
+    Translations:     0000.04b0 0000.04e4 0409.04b0 0409.04e4
+    Information from resource tables:
+0: kd> kv
+  *** Stack trace for last set context - .thread/.cxr resets it
+ # Child-SP          RetAddr           : Args to Child                                                           : Call Site
+00 ffff9981`63b171e0 fffff803`5da52f55 : ffff9b05`fd53bde0 fffff803`5da5346d 00000000`00000000 00000000`00000000 : condrv!CdpDispatchCleanup+0x1f
+01 ffff9981`63b17210 fffff803`5ddfd96a : 00000000`00000000 ffff9b05`f2f46bb0 00000000`00000000 00000000`00040000 : nt!IofCallDriver+0x55
+02 ffff9981`63b17250 fffff803`5ddff875 : ffff9b05`f2f46bb0 00000000`00000000 00000000`e9f02b45 ffff9b05`e9f02bb0 : nt!IopCloseFile+0x17a
+03 ffff9981`63b172e0 fffff803`5de2751e : ffff9b05`e9f02bb0 00000000`00000000 ffff9b06`00af2620 ffff9b06`00af2601 : nt!IopParseDevice+0x1dc5
+04 ffff9981`63b17450 fffff803`5ddeb19a : ffff9b06`00af2600 ffff9981`63b176b8 00000000`00000040 ffff9b05`db0dcc40 : nt!ObpLookupObjectName+0x3fe
+05 ffff9981`63b17620 fffff803`5de6da0e : 0000007f`00000000 0000006e`1b3ff0e0 00000000`00000000 0000006e`1b3ff0b0 : nt!ObOpenObjectByNameEx+0x1fa
+06 ffff9981`63b17750 fffff803`5dc071b5 : ffff9b06`02b9a080 ffff9b05`f52c7160 ffff9b06`02b9a080 000001c1`31e0daa0 : nt!NtQueryFullAttributesFile+0x1ce
+07 ffff9981`63b17a00 00007ff8`f6e6e864 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x25 (TrapFrame @ ffff9981`63b17a00)
+08 0000006e`1b3ff058 00000000`00000000 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ff8`f6e6e864
+
+相应的IDA的分析都不分析了。
+
+简单说下：最根本的原因是condrv!CdpDispatchCleanup+0x1f处访问了NULL内存。
+但是，更进一步的，这个为何会这样，还需进一步的IDA+windbg分析和跟踪。
+
+14:10 2021/1/19
